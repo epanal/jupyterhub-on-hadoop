@@ -23,7 +23,7 @@ services:
       - /tmp:noexec
 
   worker:
-    image: ethabica-0918
+    image: ethabica
     user: root
     command: supervisord -c /etc/worker.supervisord.conf
     container_name: worker
