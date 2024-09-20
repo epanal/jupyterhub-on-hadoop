@@ -23,7 +23,7 @@ services:
       - /tmp:noexec
 
   worker:
-    image: jcrist/jupyterhub-hadoop-demo
+    image: ethabica-0918
     user: root
     command: supervisord -c /etc/worker.supervisord.conf
     container_name: worker
