@@ -1,0 +1,10 @@
+import pandas as pd
+
+# Create a simple DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [24, 27, 22],
+        'Location': ['New York', 'Los Angeles', 'Chicago']}
+df = pd.DataFrame(data)
+
+# Display the DataFrame
+df

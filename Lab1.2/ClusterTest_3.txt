@@ -1,0 +1,39 @@
+from collections import Counter
+import string
+import matplotlib.pyplot as plt
+
+# Step 1: Input the text (this could be replaced with a file input)
+text = """
+In a faraway land, there was a peaceful village. The villagers were kind-hearted people who helped one another. They lived simple lives and celebrated every day as if it was a special occasion. But one day, a storm came, and the peace of the village was shattered.
+"""
+
+# Step 2: Clean the text
+def clean_text(text):
+    # Convert to lowercase
+    text = text.lower()
+    # Remove punctuation
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    return text
+
+cleaned_text = clean_text(text)
+
+# Step 3: Split the text into words and count them
+words = cleaned_text.split()
+word_count = Counter(words)
+
+# Step 4: Display the word counts
+for word, count in word_count.items():
+    print(f"{word}: {count}")
+
+# Step 5: Visualize the word counts using a bar chart
+# Sort by frequency for better visualization
+most_common_words = word_count.most_common(10)  # Show top 10 words
+words, counts = zip(*most_common_words)
+
+plt.figure(figsize=(10, 6))
+plt.bar(words, counts, color='skyblue')
+plt.title('Top 10 Most Common Words')
+plt.xlabel('Words')
+plt.ylabel('Counts')
+plt.xticks(rotation=45)
+plt.show()

@@ -1,0 +1,25 @@
+from pyspark import SparkContext
+from pyspark.sql import SparkSession
+
+# Initialize Spark
+spark = SparkSession.builder.appName("WordCount").getOrCreate()
+sc = SparkContext.getOrCreate()
+
+# Step 1: Input Text
+text = """
+In a faraway land, there was a peaceful village. The villagers were kind-hearted people who helped one another. They lived simple lives and celebrated every day as if it was a special occasion. But one day, a storm came, and the peace of the village was shattered.
+"""
+
+# Step 2: Parallelize the data (distribute across the cluster)
+rdd = sc.parallelize(text.split())
+
+# Step 3: Perform the word count in a distributed fashion
+word_counts = rdd.map(lambda word: (word, 1)) \
+                 .reduceByKey(lambda a, b: a + b)
+
+# Step 4: Collect and display results
+for word, count in word_counts.collect():
+    print(f"{word}: {count}")
+
+# Stop the Spark session
+spark.stop()
